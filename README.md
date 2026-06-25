@@ -5,6 +5,8 @@ with their photos; you drag them into order **MOST → LEAST** for some stat or
 trait, then **lock in** and the real values slam onto the cards to reveal how
 close you got. Farm aura, dodge the L.
 
+Live at: https://ballknowledgegg.vercel.app/
+
 ## How it plays
 
 - Pick a difficulty: **easy**, **medium**, or **hard**.
