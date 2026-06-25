@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Difficulty } from "@/lib/types";
+import { TIER_LADDER, tierRangeLabel } from "@/lib/tiers";
 
 const DIFFICULTIES: { id: Difficulty; label: string; blurb: string }[] = [
   { id: "easy", label: "Lil Bro 🍼", blurb: "icons, obvious order" },
@@ -71,6 +72,35 @@ export default function Home() {
         >
           LOCK IN 🔒⚽
         </button>
+
+        {/* Transparency: how the end-of-game rank is decided. */}
+        <section className="mt-7">
+          <h2 className="mb-3 text-sm font-black uppercase tracking-widest text-cyan-300">
+            how u get ranked 🏅
+          </h2>
+          <p className="mb-3 text-xs font-medium text-fuchsia-100/55">
+            every game = 5 rounds, 5 ballers to rank each (25 in total). ur tier
+            🏅 is the share you put in the right order — aura points are separate.
+          </p>
+          <ul className="space-y-2">
+            {TIER_LADDER.map((t) => (
+              <li
+                key={t.key}
+                className="flex items-center gap-3 rounded-2xl border-2 border-white/10 bg-white/[0.03] px-3 py-2.5"
+              >
+                <span className="text-2xl">{t.emoji}</span>
+                <span
+                  className={`bg-gradient-to-r ${t.grad} bg-clip-text font-black uppercase tracking-tight text-transparent`}
+                >
+                  {t.name}
+                </span>
+                <span className="ml-auto text-sm font-black text-fuchsia-100/70">
+                  {tierRangeLabel(t)}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </section>
 
         <p className="mt-5 text-center text-xs text-fuchsia-100/40 font-medium">
           takes by AI 🤖 · player pics from{" "}

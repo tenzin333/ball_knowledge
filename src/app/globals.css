@@ -93,3 +93,31 @@ body {
   50% { transform: scale(1.04); }
 }
 .animate-throb { animation: throb 1.1s ease-in-out infinite; }
+
+/* Loading-state motion: a spinning ball, a sequential trailing dot pulse, and
+   an indeterminate sweep bar. */
+@keyframes spin-ball {
+  to { transform: rotate(360deg); }
+}
+.animate-spin-ball { animation: spin-ball 1.8s linear infinite; }
+
+/* Dots light up one after another (left → right) for a trailing effect.
+   NOTE: use animation longhands and DON'T set animation-delay here — the
+   `animation` shorthand would reset delay to 0 and override the per-dot
+   [animation-delay:*] utilities, killing the stagger. */
+@keyframes dot-trail {
+  0%, 70%, 100% { opacity: 0.25; transform: scale(0.8); }
+  35% { opacity: 1; transform: scale(1.2); }
+}
+.animate-dot-trail {
+  animation-name: dot-trail;
+  animation-duration: 1.4s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+@keyframes loading-sweep {
+  0% { transform: translateX(-110%); }
+  100% { transform: translateX(360%); }
+}
+.animate-loading-sweep { animation: loading-sweep 1.15s ease-in-out infinite; }

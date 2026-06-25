@@ -87,11 +87,14 @@ export default function RankGame({ difficulty }: Props) {
   if (phase === "loading") {
     return (
       <div className="flex flex-1 flex-col items-center justify-center gap-4 py-24 text-center">
-        <div className="text-6xl animate-wobble">⚽</div>
-        <p className="text-xl font-black">cooking up takes… 🔥</p>
+        <div className="text-6xl animate-spin-ball">⚽</div>
+        <p className="flex items-center gap-2 text-xl font-black">
+          cooking up takes <LoadingDots /> 🔥
+        </p>
         <p className="text-sm text-fuchsia-100/50 font-medium">
           inventing spicy rankings + grabbing player pics.
         </p>
+        <SweepBar />
       </div>
     );
   }
@@ -100,8 +103,11 @@ export default function RankGame({ difficulty }: Props) {
     return (
       <div className="flex flex-1 flex-col items-center justify-center gap-4 py-24 text-center">
         <div className="text-6xl animate-throb">🧮</div>
-        <p className="text-xl font-black">calculating your aura… ✨</p>
+        <p className="flex items-center gap-2 text-xl font-black">
+          calculating your aura <LoadingDots /> ✨
+        </p>
         <p className="text-sm text-fuchsia-100/50 font-medium">tallying the dub.</p>
+        <SweepBar />
       </div>
     );
   }
@@ -158,6 +164,26 @@ export default function RankGame({ difficulty }: Props) {
         onScored={handleScored}
         onNext={handleNext}
       />
+    </div>
+  );
+}
+
+/** Three staggered bouncing dots in the brand colors. */
+function LoadingDots() {
+  return (
+    <span className="inline-flex items-center gap-1">
+      <span className="h-1.5 w-1.5 rounded-full bg-lime-400 animate-dot-trail" />
+      <span className="h-1.5 w-1.5 rounded-full bg-cyan-400 animate-dot-trail [animation-delay:0.2s]" />
+      <span className="h-1.5 w-1.5 rounded-full bg-fuchsia-400 animate-dot-trail [animation-delay:0.4s]" />
+    </span>
+  );
+}
+
+/** Indeterminate progress bar with a gradient chunk sweeping across. */
+function SweepBar() {
+  return (
+    <div className="relative mt-1 h-1.5 w-48 max-w-[60%] overflow-hidden rounded-full bg-white/10">
+      <div className="absolute inset-y-0 w-1/3 rounded-full bg-gradient-to-r from-lime-400 via-cyan-400 to-fuchsia-500 animate-loading-sweep" />
     </div>
   );
 }

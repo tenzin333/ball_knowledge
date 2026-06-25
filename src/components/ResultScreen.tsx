@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { popCorrect, popFinale } from "@/lib/confetti";
+import { tierFor } from "@/lib/tiers";
 // NOTE: Leaderboard is disabled for now. It was browser-local (localStorage)
 // only — this app is stateless with no backend/auth, so scores are per-device,
 // not per-user. Kept for later: re-enable the `saveScore` import, the `board`
@@ -18,49 +19,6 @@ interface Props {
   rounds: number;
   difficulty: string;
   onPlayAgain: () => void;
-}
-
-interface Tier {
-  key: "amateur" | "elite" | "legend";
-  name: string;
-  emoji: string;
-  grad: string; // tailwind gradient classes
-  anim: string; // tailwind/custom animation class
-  tag: string;
-}
-
-const TIERS: Record<Tier["key"], Tier> = {
-  amateur: {
-    key: "amateur",
-    name: "AMATEUR",
-    emoji: "🐣",
-    grad: "from-cyan-300 to-sky-500",
-    anim: "animate-wobble",
-    tag: "keep grinding, aura incoming 💪",
-  },
-  elite: {
-    key: "elite",
-    name: "ELITE",
-    emoji: "🦅",
-    grad: "from-fuchsia-300 to-violet-500",
-    anim: "animate-throb",
-    tag: "certified baller brain 😼🔥",
-  },
-  legend: {
-    key: "legend",
-    name: "LEGEND",
-    emoji: "👑",
-    grad: "from-yellow-300 to-amber-500",
-    anim: "animate-bounce",
-    tag: "GOAT scout, unreal 🐐🏆",
-  },
-};
-
-function tierFor(correct: number, totalSlots: number): Tier {
-  const pct = totalSlots ? correct / totalSlots : 0;
-  if (pct >= 0.85) return TIERS.legend;
-  if (pct >= 0.5) return TIERS.elite;
-  return TIERS.amateur;
 }
 
 export default function ResultScreen({
