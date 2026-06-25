@@ -1,5 +1,17 @@
 @import "tailwindcss";
 
+/* Mobile UI felt a touch large. Tailwind sizing is rem-based, so shrinking the
+   root font-size scales the whole interface down proportionally on phones and
+   restores full size at the sm: breakpoint (640px) the design is tuned for. */
+html {
+  font-size: 90%;
+}
+@media (min-width: 640px) {
+  html {
+    font-size: 100%;
+  }
+}
+
 :root {
   --background: #060011;
   --foreground: #f3e8ff;

@@ -171,6 +171,9 @@ async function complete(prompt: string): Promise<string> {
           temperature: 1, // high creativity for fun questions
           top_p: 0.95,
           max_tokens: 3400, // 5 full rounds incl. explanations (avoid truncation)
+          // Force syntactically valid JSON (no unquoted values / stray prose).
+          // The prompt already demands JSON, which json_object mode requires.
+          response_format: { type: "json_object" },
           messages: [
             { role: "system", content: SYSTEM_PROMPT },
             { role: "user", content: prompt },
